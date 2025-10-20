@@ -1,0 +1,9 @@
+{
+    "lane_keys": ["a", "s", "j", "k", "l"],
+    "overdrive_key": "space",
+    "key_hold_duration_ms": 50,
+    "delay_ms": 0,
+
+    "sound_file": "festival_notification_simple.wav",
+    "sound_volume": 0.5
+}
