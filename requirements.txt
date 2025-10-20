@@ -1,0 +1,9 @@
+fuzzywuzzy==0.18.0
+keyboard==0.13.5
+markdown-it-py==4.0.0
+mdurl==0.1.2
+prompt_toolkit==3.0.52
+pygame==2.6.1
+Pygments==2.19.2
+rich==14.2.0
+wcwidth==0.2.14
