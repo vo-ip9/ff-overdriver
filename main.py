@@ -127,21 +127,32 @@ def main():
         console.print(f"Error initializing pygame mixer: {e}", style="bold red")
         return
 
+    # get desired song
     song_names = [song["display_title"] for song in songs]
     selected_song = fuzzy_search_autocomplete(song_names, "Search for a song: ")
     if not selected_song:
         console.print("No song selected. Exiting...", style="bold red")
         return
-
     song = next(song for song in songs if song["display_title"] == selected_song)
+
+    # get desired instrument
     instruments = ["vocals", "bass", "guitar", "drums", "probass", "proguitar"]
-    instrument_index = int(console.input("\n1. Vocals\n2. Bass\n3. Guitar\n4. Drums\n5. Pro Bass\n6. Pro Guitar\n\nSelect an instrument: ").strip()) - 1
+    instrument_index = int(console.input("\n1. Vocals\n2. Bass\n3. Lead\n4. Drums\n5. Pro Bass\n6. Pro Lead\n\nSelect an instrument: ").strip()) - 1
     if instrument_index not in range(len(instruments)):
         console.print("Invalid instrument selection. Exiting...", style="bold red")
         return
-
     instrument = instruments[instrument_index]
-    timings = song["timings"][instrument]
+
+    # get desired difficulty
+    difficulties = ["easy", "medium", "hard", "expert"]
+    difficulty_index = int(console.input("\n1. Easy\n2. Medium\n3. Hard\n4. Expert\n\nSelect a difficulty: ").strip()) - 1
+    if difficulty_index not in range(len(difficulties)):
+        console.print("Invalid difficulty selection. Exiting...", style="bold red")
+        return
+    difficulty = difficulties[difficulty_index]
+
+    # finally, get the timings from the song, instrument, and difficulty
+    timings = song["timings"][difficulty][instrument]
 
     # load settings from settings.json
     delay_ms = settings.get("delay_ms", 0)
@@ -151,7 +162,7 @@ def main():
     overdrive_key = settings.get("overdrive_key", "space")
     key_hold_duration = settings.get("key_hold_duration_ms", 50) / 1000  # convert to seconds for sleep function
 
-    # to avoid doing this every time in the loop
+    # set up the sound player if wanted
     if sound_file:
         sound = pygame.mixer.Sound(sound_file)
         sound.set_volume(sound_volume)
@@ -163,6 +174,7 @@ def main():
     console.print(" ".join(f"\"{k}\"" for k in lane_keys))
     console.print("(Ctrl + C to quit)\n", style="bold cyan ")
 
+    # wait for the first note press
     while True:
         event = read_event()
         if event.event_type == KEY_DOWN and event.name in lane_keys:
@@ -193,6 +205,7 @@ def main():
     while sound_channel.get_busy():
         time.sleep(0.1)
     console.print("Song overdrives complete.", style="bold cyan")
+    time.sleep(100) # exiting immediately can lag the game somewhat, best to wait.
 
 
 if __name__ == "__main__":
