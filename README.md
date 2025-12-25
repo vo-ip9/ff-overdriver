@@ -9,7 +9,7 @@ Thankfully, people have come up with solutions, notably the "CHOpt" project by G
 This is the underlying algorithm used to find the best timings, and FF Overdriver simply provides a way to make this information actionable.
 
 # Features
-- As of Oct 2025, all songs* in Fortnite Festival are supported on all 6 instruments (Vocals, Bass, Lead, Drums, Pro Bass, Pro Lead) and all 4 difficulties (Easy, Medium, Hard, Expert) in the songs.json file, which I will update periodically.
+- As of Dec 2025, all songs* in Fortnite Festival are supported on all 6 instruments (Vocals, Bass, Lead, Drums, Pro Bass, Pro Lead) and all 4 difficulties (Easy, Medium, Hard, Expert) in the songs.json file, which I update periodically.
 - Overdrives for you by pressing the given key and playing a given sound file
 - Customizable lane keys, overdrive keys, notification sounds, and more via settings.json
 - Easy to start and navigate via a simple GUI
